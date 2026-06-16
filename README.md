@@ -43,6 +43,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   YAML across the five-layer medallion: `stg_` (1:1 clean, no joins), `int_` (the explicit join /
   golden-record layer with not-null + `relationships` **join contracts**, e.g. Taxpayer-360), and
   `mart_` (composes from `int_`, never re-joins raw). `gen_dbt_model.py`.
+- `add-dq-checks/` — **quality skill (built & validated).** Applies the DQF's six dimensions to a
+  model: dimension-tagged dbt schema tests (uniqueness/completeness/validity/consistency) + singular
+  tests (timeliness freshness vs tier SLA, completeness row-budget, accuracy reconciliation stub) +
+  the per-dimension threshold config that feeds the 0–100 quality badge. `gen_dq_checks.py`.
 - `legacy-module-to-openmetadata/` — **pilot skill (built & validated).** From a legacy
   PowerBuilder module's source (`.pbl`), with no database, it recovers the tables/columns the
   module uses and produces an OpenMetadata-ready semantic enrichment (YAML + review markdown).
@@ -61,6 +65,7 @@ Packaged, installable skills — open one in Claude Desktop (Cowork) and choose 
 - `repo-scaffold.skill`
 - `onboard-source.skill`
 - `build-dbt-model.skill`
+- `add-dq-checks.skill`
 - `legacy-module-to-openmetadata.skill`
 
 ---
