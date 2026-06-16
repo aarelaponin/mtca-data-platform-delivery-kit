@@ -34,6 +34,11 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   conventions baked in (the five-layer dbt medallion, ingestion, catalogue, quality, consumption,
   security, ops, plus cross-OS hygiene files) **and** owns the shared, cross-OS,
   commit-on-the-workstation git workflow that every other skill calls into.
+- `onboard-source/` — **build skill (built & validated).** Onboards a legacy source into Bronze
+  under the DQF gates: `profile_source.py` (the pre-DDL profiling gate, dialect-aware) +
+  `gen_bronze_ddl.py` (schema spec → ClickHouse Bronze DDL with money widened to `Decimal(38,s)`).
+  Encodes the proven ARMS pipeline — profile → human gate → DDL → gated load → reconciliation
+  manifests.
 - `legacy-module-to-openmetadata/` — **pilot skill (built & validated).** From a legacy
   PowerBuilder module's source (`.pbl`), with no database, it recovers the tables/columns the
   module uses and produces an OpenMetadata-ready semantic enrichment (YAML + review markdown).
@@ -50,6 +55,7 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
 ### dist/
 Packaged, installable skills — open one in Claude Desktop (Cowork) and choose **Save skill**:
 - `repo-scaffold.skill`
+- `onboard-source.skill`
 - `legacy-module-to-openmetadata.skill`
 
 ---
