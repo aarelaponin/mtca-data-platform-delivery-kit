@@ -155,6 +155,33 @@ replace every `TODO`/`(to confirm)` you resolved, keep `confirmedAgainstInventor
 `application.usesTables` seeds the app→table lineage; each `tables[].columns[]` carries the
 description. Hand both to the catalogue team — YAML to load, markdown to review.
 
+### 7 — Commit the result to version control
+
+The job isn't done when the files exist — it's done when they're **committed**. A recovered
+semantic enrichment is platform metadata; it belongs in the versioned catalogue repository
+alongside every other module's, so it has history, review and a single source of truth. Save the
+finalised `.yaml` and `.md` into the repo's module-semantics area and commit them with a clear
+message (e.g. `catalogue: add <Module> semantic enrichment (DRAFT, NN tables/MM cols)`).
+
+Important Cowork detail: the Cowork sandbox **cannot delete files on the workstation**, so an
+in-sandbox `git` strands lock files. Run git **on the machine** instead — via Desktop Commander or
+a terminal — on whichever OS the team member uses:
+
+```bash
+# macOS / Linux
+cd "<repo>/<catalogue-path>" && git add <Module>_OpenMetadata.* && \
+  git commit -m "catalogue: add <Module> semantic enrichment (DRAFT)"
+```
+```powershell
+# Windows (PowerShell)
+cd "<repo>\<catalogue-path>"; git add <Module>_OpenMetadata.*; `
+  git commit -m "catalogue: add <Module> semantic enrichment (DRAFT)"
+```
+
+Committing is for traceability, not a substitute for the verification gate in step 5 — the
+description stays **DRAFT** in the commit until a Data Owner verifies it. Open a PR if the repo
+uses review.
+
 ## OpenMetadata output contract
 
 ```yaml

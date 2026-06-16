@@ -21,6 +21,7 @@ The Data Management team is new to structured, production-grade delivery; the Da
 - **Shadow → pair → lead.** STX/contractor does it first (team watches), then pairs, then the team leads. The cookbooks are the script for this.
 - **Both registers, always.** Every dimension ships with *Principles* (the why/rules) **and** *Cookbooks* (exact how) — the team was explicit on this.
 - **Cross-platform by default (Windows + macOS).** The team works on mixed Windows and Mac workstations, so every cookbook gives commands for **both** — favour OS-agnostic tooling (containers, `uv`, a `make`/task runner, VS Code; WSL2 on Windows) and never assume a single shell or OS.
+- **Version-controlled by default.** Nothing the team produces should live only in a chat, a Downloads folder, or a personal drive. Every artifact a cookbook or skill creates — a spec, a model, a description YAML, a checklist result — is written into the **versioned repository** and committed, so the platform's definitions and the evidence of its delivery have history, review and a single source of truth. Practical note for Cowork: the Cowork sandbox cannot delete files on the workstation, so **git itself runs on the machine** (via the desktop file tools / Desktop Commander, or a terminal) — the skills write files into the repo and commit them there; they never assume an in-sandbox git.
 
 ## 2. The artifact taxonomy (how every dimension is documented)
 
@@ -62,9 +63,9 @@ Grouped into four capability bands plus cross-cutting. Each dimension lists: **S
 - *Reuses:* Blueprint (architecture); Prerequisites memo (environment).
 
 **D3. Version control & collaboration (Git)**
-- *Scope:* Git basics; the mono-repo layout; branching; pull requests & review; baseline-as-code; commit hygiene; never hand-edit generated artefacts.
-- *Artifacts:* P (everything-as-code, PR-reviewed) · C (branch → commit → PR → merge; review a PR) · T (PR template) · Ch (PR-ready checklist).
-- *Outcome:* all platform definitions live in Git, reviewed.
+- *Scope:* Git basics; the mono-repo layout; branching; pull requests & review; baseline-as-code; commit hygiene; never hand-edit generated artefacts. **Cross-OS + Cowork git mechanics:** the same git workflow on Windows and macOS; and — because the Cowork sandbox cannot delete files on the workstation (so in-sandbox `git` strands lock files) — **git runs on the machine**: skills/cookbooks write outputs into the repo, then commit via Desktop Commander (or a terminal) on the workstation. **Every skill ends by committing its output here** — version control is the last step of every cookbook, not a separate dimension.
+- *Artifacts:* P (everything-as-code, PR-reviewed; commit-on-the-workstation) · C (branch → commit → PR → merge; review a PR; **commit a skill's output to the repo on Windows/macOS**) · T (PR template; commit-message convention) · Ch (PR-ready checklist).
+- *Outcome:* all platform definitions and delivery evidence live in Git, reviewed; every skill writes through to a commit.
 
 ### BAND 2 — BUILD (turn legacy data into trusted models)
 
@@ -200,11 +201,13 @@ Milestones (Debt, the first slice): **M0** environment/access · **M1** debt sou
 
 The team works in **Claude Cowork**, so the *how-to* (Layer C) is best delivered as **Cowork Skills** — a skill is the cookbook that triggers and runs itself, carrying the scripts, conventions and guardrails. Principles, Templates and Checklists stay as documents; the cookbooks become an installable **"MTCA Data Platform" skill pack** (versioned in Git). Skills *guide* the work; the Data-Owner sign-offs and DoD checklists still *gate* it. Cross-checked against the proven ARMS skill set:
 
+**A standing rule for every skill in the pack — write through to a commit.** Each skill's final step is to save its output into the versioned repository and commit it on the workstation (Desktop Commander / terminal — never an in-sandbox git, which the Cowork sandbox can't clean up), with a clear message and the cross-OS commands. A skill that produces an artifact but leaves it uncommitted has not finished. The `repo-scaffold` and `mtca-dev-workflow` skills own the shared git mechanics (clone/branch/commit/PR on Windows + macOS); the others call into that convention.
+
 | Skill | Origin | Dimension | Automates |
 |---|---|---|---|
 | `mtca-architecture-principles` | port `arms-principles` | D0 | apply the principles register to a decision |
-| `mtca-dev-workflow` | port `arms-dev-workflow` | D2/D8/D11 | build/run/test/dbt/deploy/verify — two-track, **cross-OS** command blocks |
-| `repo-scaffold` | port | D3/D5 | lay out the repo with conventions + pre-commit |
+| `mtca-dev-workflow` | port `arms-dev-workflow` | D2/D8/D11 | build/run/test/dbt/deploy/verify — two-track, **cross-OS** command blocks; **commit-on-the-workstation git** |
+| `repo-scaffold` | port | D3/D5 | lay out the repo with conventions + pre-commit; **the shared clone/branch/commit/PR mechanics every skill calls** |
 | `onboard-source` | port `arms-source-onboarding` | D4 | profile → Bronze DDL → gated extractor → reconciliation manifests |
 | `import-schema-to-catalogue` | port `dc-import-schema` | D7 | source DDL → catalogue + reference-data vocabularies + dbt `sources.yml` |
 | `legacy-module-to-openmetadata` | **NEW (Malta)** | D7 | PowerBuilder source → app→table lineage + draft descriptions (pilot) |
