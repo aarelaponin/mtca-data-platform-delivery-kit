@@ -30,6 +30,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   skill-pack plan. This is the blueprint the rest of the kit is built against.
 
 ### skills/
+- `repo-scaffold/` — **foundation skill (built).** Lays out the platform mono-repo with
+  conventions baked in (the five-layer dbt medallion, ingestion, catalogue, quality, consumption,
+  security, ops, plus cross-OS hygiene files) **and** owns the shared, cross-OS,
+  commit-on-the-workstation git workflow that every other skill calls into.
 - `legacy-module-to-openmetadata/` — **pilot skill (built & validated).** From a legacy
   PowerBuilder module's source (`.pbl`), with no database, it recovers the tables/columns the
   module uses and produces an OpenMetadata-ready semantic enrichment (YAML + review markdown).
@@ -44,8 +48,9 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   (D6) and operations/governance dimensions (D11, D13) build on.
 
 ### dist/
-- `legacy-module-to-openmetadata.skill` — the packaged pilot skill, ready to install in Claude
-  Desktop (Cowork): open it and choose **Save skill**.
+Packaged, installable skills — open one in Claude Desktop (Cowork) and choose **Save skill**:
+- `repo-scaffold.skill`
+- `legacy-module-to-openmetadata.skill`
 
 ---
 
