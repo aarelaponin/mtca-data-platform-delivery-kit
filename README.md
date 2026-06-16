@@ -47,6 +47,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   model: dimension-tagged dbt schema tests (uniqueness/completeness/validity/consistency) + singular
   tests (timeliness freshness vs tier SLA, completeness row-budget, accuracy reconciliation stub) +
   the per-dimension threshold config that feeds the 0–100 quality badge. `gen_dq_checks.py`.
+- `import-schema-to-catalogue/` — **catalogue structure skill (built & validated).** Schema spec →
+  dbt `sources.yml` (with ClickHouse-type meta) + OpenMetadata technical-metadata import + reference
+  vocabularies (code→label + `accepted_values` for validity tests). The *technical* half of cataloguing;
+  consumes `onboard-source`'s schema spec. `import_schema.py`.
 - `verify-catalogue-semantics/` — **catalogue gate skill (built & validated).** Drives a semantic
   enrichment from DRAFT → VERIFIED and enforces the gate: `verify_semantics.py` (emit ledger → apply →
   verified YAML + log + coverage → exit-code gate, plus a data-arithmetic identity check). Only
@@ -70,6 +74,7 @@ Packaged, installable skills — open one in Claude Desktop (Cowork) and choose 
 - `onboard-source.skill`
 - `build-dbt-model.skill`
 - `add-dq-checks.skill`
+- `import-schema-to-catalogue.skill`
 - `verify-catalogue-semantics.skill`
 - `legacy-module-to-openmetadata.skill`
 
