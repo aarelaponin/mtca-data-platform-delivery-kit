@@ -39,6 +39,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   `gen_bronze_ddl.py` (schema spec → ClickHouse Bronze DDL with money widened to `Decimal(38,s)`).
   Encodes the proven ARMS pipeline — profile → human gate → DDL → gated load → reconciliation
   manifests.
+- `build-dbt-model/` — **build skill (built & validated).** Spec → dbt model SQL + tested schema
+  YAML across the five-layer medallion: `stg_` (1:1 clean, no joins), `int_` (the explicit join /
+  golden-record layer with not-null + `relationships` **join contracts**, e.g. Taxpayer-360), and
+  `mart_` (composes from `int_`, never re-joins raw). `gen_dbt_model.py`.
 - `legacy-module-to-openmetadata/` — **pilot skill (built & validated).** From a legacy
   PowerBuilder module's source (`.pbl`), with no database, it recovers the tables/columns the
   module uses and produces an OpenMetadata-ready semantic enrichment (YAML + review markdown).
@@ -56,6 +60,7 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
 Packaged, installable skills — open one in Claude Desktop (Cowork) and choose **Save skill**:
 - `repo-scaffold.skill`
 - `onboard-source.skill`
+- `build-dbt-model.skill`
 - `legacy-module-to-openmetadata.skill`
 
 ---
