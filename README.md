@@ -47,6 +47,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   model: dimension-tagged dbt schema tests (uniqueness/completeness/validity/consistency) + singular
   tests (timeliness freshness vs tier SLA, completeness row-budget, accuracy reconciliation stub) +
   the per-dimension threshold config that feeds the 0–100 quality badge. `gen_dq_checks.py`.
+- `verify-catalogue-semantics/` — **catalogue gate skill (built & validated).** Drives a semantic
+  enrichment from DRAFT → VERIFIED and enforces the gate: `verify_semantics.py` (emit ledger → apply →
+  verified YAML + log + coverage → exit-code gate, plus a data-arithmetic identity check). Only
+  VERIFIED descriptions may drive a mart or the DcP3 handover. Pairs with `legacy-module-to-openmetadata`.
 - `legacy-module-to-openmetadata/` — **pilot skill (built & validated).** From a legacy
   PowerBuilder module's source (`.pbl`), with no database, it recovers the tables/columns the
   module uses and produces an OpenMetadata-ready semantic enrichment (YAML + review markdown).
@@ -66,6 +70,7 @@ Packaged, installable skills — open one in Claude Desktop (Cowork) and choose 
 - `onboard-source.skill`
 - `build-dbt-model.skill`
 - `add-dq-checks.skill`
+- `verify-catalogue-semantics.skill`
 - `legacy-module-to-openmetadata.skill`
 
 ---
