@@ -94,7 +94,10 @@ Start at `docs/skill-pack-index.md` for the install guide and the 13-skill deliv
   (D6) and operations/governance dimensions (D11, D13) build on.
 
 ### dist/
-Packaged, installable skills — open one in Claude Desktop (Cowork) and choose **Save skill**:
+**Easiest install — one plugin:** `mtca-data-platform.plugin` bundles all 13 skills; install it once
+in Claude Desktop (Cowork) and the whole pack is available. (New to the kit? Read `docs/handover-brief.md`.)
+
+Or install skills individually — open a `.skill` and choose **Save skill**:
 - `mtca-architecture-principles.skill`
 - `mtca-dev-workflow.skill`
 - `repo-scaffold.skill`
