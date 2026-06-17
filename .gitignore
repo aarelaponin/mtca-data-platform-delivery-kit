@@ -16,3 +16,7 @@ Thumbs.db
 *.tmp
 *.log
 _scratch/
+
+# stray skill-run scratch
+_run_out/
+_validate/
