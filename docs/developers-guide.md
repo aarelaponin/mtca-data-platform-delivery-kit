@@ -36,8 +36,11 @@ ops, governance) · §8 the gates · §9 daily rhythm · §10 troubleshooting ·
 - **Network & platform access** per the Blueprint: the **MAGNET ↔ Azure VPN bridge**; credentials
   (via **Keycloak** SSO) for **ClickHouse**, **dbt**, **OpenMetadata**, **Superset**; and the
   manifest store (**PostgreSQL `dq`**).
-- **Anonymised dev databases** for development (real Restricted data is gated by the DPO's DPIA — see
-  §7).
+- **Test environment with real data.** MITA does not yet have an anonymisation/pseudonymisation
+  capability, so the test environment you develop against holds **real, un-anonymised Restricted
+  data**. This *raises* the data-protection bar, it does not lower it — see the data-handling note
+  in §7. **Do not start against real data until the DPO has approved its use in the test
+  environment** (the DPIA must cover test, not only production).
 - **Source access** to the legacy systems you will onboard (e.g. the Informix `irdnew` estate),
   read-only, from the platform network.
 
@@ -250,7 +253,8 @@ to Cowork** (a trigger), **Prepare** (inputs you bring), **Produces**, **Run liv
    the rest (deployed/promoted, monitoring live, **DPIA/DPO clearance for real data**, UAT sign-off,
    go-live sign-off), and returns a hard **pass/fail**.
 2. Close every ❌: stand up CI, write and **rehearse** the rollback, get the debt-team UAT and the DGC
-   sign-off, obtain the DPIA clearance for moving from anonymised dev data to real Restricted data.
+   sign-off. (The DPIA covering real data — used in both test and production — should already be
+   approved per §7; confirm it here.)
    - **Run live:** promote dev → test → prod through the pipeline; cut over; hypercare.
 - **Gate / DoD:** `production-readiness-check` returns **GATE PASS**; keep the green report as the
   release evidence. **You are in production.**
@@ -289,10 +293,23 @@ The platform gets richer with each consumer: the first is the hardest; every lat
   the reconciler rolls them into the 0–100 **quality badge** in OpenMetadata (the headline score the
   programme tracks to ~90% by Q4 2026). dbt tests are **gates** (fail the build); the OpenMetadata
   profiler does fitness **monitoring** (incidents). See `frameworks/data-quality-framework/`.
-- **Security & data protection.** Restricted-by-default; classification cascades; access via Keycloak
-  RBAC. **Real Restricted data may not be processed until the DPO's DPIA clears it** (GDPR Art. 35;
-  MITA AI-10/SEC-02) — develop on **anonymised** dev data until then. This is a hard go-live gate
-  (`production-readiness-check` SEC-2).
+- **Security & data protection — real data in test (read this).** Restricted-by-default;
+  classification cascades; access via Keycloak RBAC. Because MITA has no anonymisation capability yet,
+  the **test environment holds real, un-anonymised Restricted data**, so it must be treated with the
+  **same protection as production from day one**, with these compensating controls:
+    - **DPO approval first.** The **DPIA must explicitly cover the test/development environment** and
+      the residual risk of using production-grade personal data outside production; the DPO signs off
+      *before* the team touches real data (GDPR Art. 35; MITA AI-10/SEC-02).
+    - **Named, least-privilege access** via Keycloak — only authorised DP-team members, no shared
+      accounts; **audit logging** of access and queries on from the start.
+    - **The environment is Restricted:** encrypted at rest/in transit, on the MAGNET/secured network,
+      **no copying data to laptops, email, external drives, screenshots or chat tools**, and secure
+      disposal of any extract.
+    - **Record it as a known constraint** (an ADR via `mtca-architecture-principles`): real data is
+      used in test *pending* an anonymisation/pseudonymisation capability at MITA, which is the agreed
+      remediation; revisit when the tool exists.
+  This is still a hard go-live gate (`production-readiness-check` SEC-2) — now covering test as well as
+  production.
 - **Version control & CI.** Everything-as-code, committed and PR-reviewed; git runs on the
   workstation. Stand up CI to run `dbt test` and the hygiene hooks on every change (a failing test
   blocks promotion). Never hand-edit a generated artefact — fix the spec and regenerate.
@@ -323,7 +340,57 @@ cleared all of them, with evidence:
 
 ---
 
-## 9. Daily working rhythm
+## 9. Working as a team of three (and the daily rhythm)
+
+Three developers can work in parallel without the outputs diverging — **because the skills, the
+conventions and the gates enforce consistency for you**. Three people using the same skills produce
+uniform work by construction: `repo-scaffold` fixes the layout and naming; the generators are
+deterministic; `mtca-architecture-principles` settles design choices by citation; and the `int_` join
+contracts, the DQ gates and the verification gate catch divergence automatically. So the job is to
+**split work so people don't collide, and review each other** — not to make everyone do the same thing.
+
+**Split by vertical ownership, not by horizontal layer.** Don't have one person do "all staging" and
+another "all marts" — that creates wait-chains and blurred ownership. Instead:
+
+- **The first (Debt) slice: build it together.** One developer drives, the other two review, **rotating
+  the keyboard per milestone** (M1 ingestion → M2/M3 modelling → M4/M5 consumption → M6 go-live). Everyone
+  sees the whole path once. This is the shadow → pair → lead start, and it sets the patterns the rest of
+  the work copies.
+- **After the patterns are proven: parallelise by ownership.** Two workable splits:
+    - *By role* — **Dev A** ingestion & catalogue (`onboard-source`, `import-schema-to-catalogue`,
+      `legacy-module-to-openmetadata`, `verify-catalogue-semantics`); **Dev B** modelling & quality
+      (`build-dbt-model`, `add-dq-checks`); **Dev C** consumption & ops (`build-superset-dashboard`,
+      `expose-api`, CI/monitoring, `production-readiness-check`).
+    - *By source/domain* (better once you're doing breadth) — each developer owns a **source or mart
+      family end-to-end** through the whole loop. Fewer hand-offs; each person carries their slice from
+      Bronze to a green gate.
+
+**Appoint one owner for the shared core.** The biggest consistency risk is two people defining the same
+thing differently. Give **one developer (rotating) ownership of the single-source-of-truth pieces** —
+`int_taxpayer__master` (Taxpayer-360), the shared metric definitions, the naming conventions, and the
+`main` branch. Nobody else changes those without that owner's review. Everyone else **composes from**
+them (P6: pull from Gold, one definition per fact).
+
+**Git is the consistency backbone** (this is where parallel work converges):
+
+- Branch per task (`feat/debt-aged-balances`); keep PRs small.
+- **Every PR is reviewed by another developer before merge** — peer review is where consistency is
+  actually enforced.
+- `main` is **protected**, and **CI runs `dbt test` + the pre-commit hooks on every PR** — a red test
+  blocks the merge.
+- **One artefact, one owner at a time** — don't let two people edit the same model/spec; the board
+  shows who owns what.
+
+**Cadence:** a 15-minute daily standup (who's on what, blockers, who needs whose output); a shared
+backlog/board with clear owners (the coverage and `onboard-consumer` backlogs feed it); a weekly
+integration + a short design huddle for any cross-cutting decision (**record it as an ADR** via
+`mtca-architecture-principles`). **Definition of Done = the gates are green** (DQ, verify, readiness).
+
+The four rules that keep three people aligned: **decide by citation** (principles/ADRs), **generate —
+never hand-edit**, **one definition per fact** (pull from Gold), and **peer-reviewed PRs through CI**.
+Rotate the roles so all three can do every part by the end.
+
+### Daily rhythm
 
 - **Pick the next slice** (a source, a mart, a dashboard) from the backlog.
 - **Decide the track**: generate in Cowork (Track A); run dbt/loads/imports and commit on your

@@ -23,8 +23,11 @@ are advisory.
   OpenAPI contract; enforce them in Superset / the gateway.
 - **SEC-2 — DPIA / DPO clearance (attest, blocker).** Real (Restricted) data may not be processed
   until the DPO's DPIA clears it (GDPR Art. 35; MITA AI-10/SEC-02). Evidence: the DPIA reference and
-  the DPO sign-off. This is the gate that anonymised-dev exists to respect — don't go to prod data
-  without it.
+  the DPO sign-off. **Note for MTCA:** there is no anonymisation capability yet, so real data is used in
+  the **test** environment too — the DPIA must cover test as well as production, with least-privilege
+  access and audit logging as compensating controls, and the arrangement recorded as a constraint with
+  anonymisation as the remediation. Confirm the DPO has approved test-environment use before any real
+  data is touched.
 - **SEC-3 — Secrets handled (auto, blocker).** No credentials in the repo. Evidence: `.env` and
   `profiles.yml` gitignored; a secret-scan (gitleaks) in CI.
 
