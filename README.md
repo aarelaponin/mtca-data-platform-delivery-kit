@@ -10,18 +10,21 @@ This repository is a **knowledge product**: a self-contained, version-controlled
 intended to be shipped to MTCA. It is kept separate from the day-to-day working folder so that
 what we hand over has a clean structure and a clear history.
 
-Status: **v0.1 — in development.** Content design approved; skill pack in build.
+Status: **v0.1.** Content design approved; the **13-skill pack is built, validated and packaged**
+(`dist/`). See `docs/skill-pack-index.md` for the install guide and the delivery-loop map. Remaining
+work is human-owned: run the live builds/loads on the stack, stand up CI/monitoring, UAT, DPIA, sign-off.
 
 ---
 
 ## What's in here
 
 ```
-docs/        Written guidance (the delivery-guidance content design and, later, the cookbooks)
+docs/        Written guidance — the content design + the skill-pack index/install guide
 frameworks/  Standalone framework deliverables the guidance builds on (e.g. the DQF)
 skills/      Cowork skill sources — one folder per skill (SKILL.md + scripts + references)
 dist/        Packaged, installable artefacts (.skill files ready to load into Cowork)
 ```
+Start at `docs/skill-pack-index.md` for the install guide and the 13-skill delivery-loop map.
 
 ### docs/
 - `delivery-guidance_content-design_v0.1.md` — the agreed content design for the delivery
