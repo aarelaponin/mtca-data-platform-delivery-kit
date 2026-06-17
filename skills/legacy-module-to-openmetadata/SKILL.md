@@ -77,9 +77,12 @@ python3 scripts/extract_pb_tables.py \
 py -3 scripts\extract_pb_tables.py --source "C:\path\to\library.pbl" --inventory "C:\path\to\inventory.yaml" --out "C:\path\to\out" --module-name MyModule
 ```
 
-`--inventory` and `--module-name` are optional (module name defaults to the filename). The
-script needs only the Python standard library; if `PyYAML` happens to be installed it uses it,
-otherwise it writes valid YAML itself. It produces three files in `--out`:
+`--inventory` and `--module-name` are optional (module name defaults to the filename). Point
+`--out` at a **workspace / catalogue output directory in the repo** (e.g. `catalogue/module-semantics/`)
+— **not** at the skill's own folder; the script writes three files there, and you want them with your
+deliverables, not buried in the skill. The script needs only the Python standard library; if `PyYAML`
+happens to be installed it uses it, otherwise it writes valid YAML itself. It produces three files in
+`--out`:
 
 - `<Module>_extraction.json` — the evidence: confirmed tables, dml-only candidates, authoritative
   `dbname` column pairs, column-prefix families, the auto-mapping, and the prefixes it could
