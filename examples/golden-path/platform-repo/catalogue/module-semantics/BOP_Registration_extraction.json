@@ -1,0 +1,573 @@
+{
+ "module": "BOP_Registration",
+ "confirmed_tables": {
+  "taxpayer": {
+   "db": [
+    "ars",
+    "ctd",
+    "irdnew",
+    "irdweb@servrev2_tcp"
+   ],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "contact": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "codednote": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "note": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "category": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "bop": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "accountperiod": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "coincentive": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "reason": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "locality": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "incentive": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "sect": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "return": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "administrator": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "application": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "std_message": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "parameter": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "street": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "DataWindow",
+    "FROM"
+   ]
+  },
+  "foundation": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "list": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "FROM"
+   ]
+  },
+  "country": {
+   "db": [
+    "irdnew"
+   ],
+   "via": [
+    "DataWindow"
+   ]
+  }
+ },
+ "operational_tables_dml_only": {
+  "bopyearmember": {
+   "db": [],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "whitefile": {
+   "db": [],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "partner": {
+   "db": [],
+   "via": [
+    "DELETE",
+    "FROM"
+   ]
+  },
+  "taxpayerlock": {
+   "db": [],
+   "via": [
+    "DELETE",
+    "FROM",
+    "INSERT",
+    "UPDATE"
+   ]
+  },
+  "fss_errors": {
+   "db": [],
+   "via": [
+    "DELETE",
+    "FROM",
+    "INSERT"
+   ]
+  },
+  "uniquekey": {
+   "db": [],
+   "via": [
+    "FROM",
+    "UPDATE"
+   ]
+  }
+ },
+ "dbname_pairs": {
+  "street": [
+   "str_name1",
+   "str_name2",
+   "str_serial"
+  ],
+  "country": [
+   "cou_name",
+   "cou_serial"
+  ]
+ },
+ "column_prefix_families": {
+  "tax": [
+   "tax_abode",
+   "tax_abode_t",
+   "tax_admnname",
+   "tax_admnname_t",
+   "tax_admref",
+   "tax_catref",
+   "tax_catref_t",
+   "tax_deletion",
+   "tax_dobirth",
+   "tax_dobirth_t",
+   "tax_dodeath",
+   "tax_dodeath_t",
+   "tax_firstret",
+   "tax_firstret_t",
+   "tax_language",
+   "tax_language_t",
+   "tax_lastret",
+   "tax_lastret_t",
+   "tax_rearef",
+   "tax_rearef_t",
+   "tax_regdate",
+   "tax_regdate_t",
+   "tax_retref",
+   "tax_retref_t",
+   "tax_sect",
+   "tax_security",
+   "tax_serial",
+   "tax_strref",
+   "tax_timestamp",
+   "tax_tpform",
+   "tax_tpref",
+   "tax_tpref__t__f",
+   "tax_tpref_t",
+   "tax_user",
+   "tax_userid"
+  ],
+  "bop": [
+   "bop_activity",
+   "bop_activity_t",
+   "bop_assoctaxref",
+   "bop_bop_name",
+   "bop_name",
+   "bop_name__t__f",
+   "bop_name_t",
+   "bop_sbcref",
+   "bop_taxref",
+   "bop_tpref",
+   "bop_vat",
+   "bop_vat__t__f",
+   "bop_vat_t"
+  ],
+  "cat": [
+   "cat_desc",
+   "cat_desc_t",
+   "cat_prefix",
+   "cat_scope",
+   "cat_serial"
+  ],
+  "loc": [
+   "loc_couref",
+   "loc_name",
+   "loc_name__t__f",
+   "loc_name_t",
+   "loc_serial",
+   "loc_taxref",
+   "loc_timestamp",
+   "loc_userid"
+  ],
+  "em": [
+   "em_empr_ref",
+   "em_ployer",
+   "em_tp_ref"
+  ],
+  "str": [
+   "str_locref",
+   "str_name1",
+   "str_name1_t",
+   "str_name2",
+   "str_name2_t",
+   "str_postcode",
+   "str_postcode_t",
+   "str_serial"
+  ],
+  "cou": [
+   "cou_name",
+   "cou_name_t",
+   "cou_serial"
+  ],
+  "ret": [
+   "ret_desc",
+   "ret_desc_t",
+   "ret_scope",
+   "ret_serial"
+  ],
+  "con": [
+   "con_email",
+   "con_email_t",
+   "con_fax",
+   "con_fax_t",
+   "con_locref",
+   "con_name",
+   "con_name_t",
+   "con_phone1",
+   "con_phone1_t",
+   "con_phone2",
+   "con_phone2_t",
+   "con_postcode",
+   "con_postcode_t",
+   "con_rolref",
+   "con_serial",
+   "con_street",
+   "con_street__t__f",
+   "con_street_t",
+   "con_strref",
+   "con_taxref",
+   "con_timestamp",
+   "con_timestamp__t__f",
+   "con_userid",
+   "con_yrfrom",
+   "con_yrfrom__t__f",
+   "con_yrfrom_t",
+   "con_yrto"
+  ],
+  "rol": [
+   "rol_desc",
+   "rol_desc__t__f",
+   "rol_desc_t",
+   "rol_scope",
+   "rol_serial"
+  ],
+  "bym": [
+   "bym_paidupmem",
+   "bym_paidupmem__t__f",
+   "bym_paidupmem_t",
+   "bym_paidupmem_t_b",
+   "bym_perctest",
+   "bym_perctest__t__f",
+   "bym_perctest_t",
+   "bym_perctest_t_b",
+   "bym_serial",
+   "bym_taxref",
+   "bym_votingmem",
+   "bym_votingmem__t__f",
+   "bym_votingmem_t",
+   "bym_votingmem_t_b",
+   "bym_year",
+   "bym_year__t__f",
+   "bym_year_t",
+   "bym_year_t_b"
+  ],
+  "cdn": [
+   "cdn_note",
+   "cdn_note__t__f",
+   "cdn_parameter",
+   "cdn_scope",
+   "cdn_serial"
+  ],
+  "not": [
+   "not_codref",
+   "not_docs",
+   "not_freetext",
+   "not_irdsect",
+   "not_serial",
+   "not_taxref",
+   "not_timestamp",
+   "not_timestamp__t__f",
+   "not_userid",
+   "not_userid__t__f",
+   "not_yrfrom",
+   "not_yrfrom__t__f",
+   "not_yrto"
+  ],
+  "note": [
+   "note_not_docs_t",
+   "note_not_userid_t",
+   "note_not_yrfrom_t",
+   "note_not_yrto_t",
+   "note_serial"
+  ],
+  "wfl": [
+   "wfl_number",
+   "wfl_number_t",
+   "wfl_serial",
+   "wfl_taxref"
+  ],
+  "acc": [
+   "acc_date",
+   "acc_date__t__f",
+   "acc_date_t",
+   "acc_period",
+   "acc_permit",
+   "acc_permit__t__f",
+   "acc_permit_t",
+   "acc_serial",
+   "acc_taxref",
+   "acc_timestamp",
+   "acc_timestamp__t__f",
+   "acc_userid",
+   "acc_year",
+   "acc_yrfrom",
+   "acc_yrfrom__t__f",
+   "acc_yrfrom_t",
+   "acc_yrto",
+   "acc_yrto__t__f",
+   "acc_yrto_t"
+  ],
+  "adm": [
+   "adm_desc",
+   "adm_serial"
+  ],
+  "sbc": [
+   "sbc_catref",
+   "sbc_desc",
+   "sbc_desc_t",
+   "sbc_serial"
+  ],
+  "par": [
+   "par_abbr",
+   "par_endyear",
+   "par_endyear_t",
+   "par_endyearr__t__f",
+   "par_serial",
+   "par_startyear",
+   "par_startyear__t__f",
+   "par_startyear_t",
+   "par_taxperson",
+   "par_taxref",
+   "par_timestamp",
+   "par_timestamp__t__f",
+   "par_type",
+   "par_userid",
+   "par_userid__t__f",
+   "par_value"
+  ],
+  "rea": [
+   "rea_desc",
+   "rea_desc_t",
+   "rea_scope",
+   "rea_serial"
+  ],
+  "cin": [
+   "cin_details",
+   "cin_details_t",
+   "cin_incref",
+   "cin_serial",
+   "cin_taxref",
+   "cin_timestamp",
+   "cin_timestamp__t__f",
+   "cin_userid",
+   "cin_userid__t__f",
+   "cin_yrfrom",
+   "cin_yrfrom__t__f",
+   "cin_yrfrom_t"
+  ],
+  "inc": [
+   "inc_desc",
+   "inc_desc__t__f",
+   "inc_desc_t",
+   "inc_scope",
+   "inc_serial"
+  ],
+  "fou": [
+   "fou_firstadmindate",
+   "fou_prno",
+   "fou_serial",
+   "fou_taxref",
+   "fou_vono"
+  ],
+  "ird": [
+   "ird_common",
+   "ird_compatibility",
+   "ird_dataaccess",
+   "ird_search"
+  ],
+  "yea": [
+   "yea_locktime",
+   "yea_lockuser",
+   "yea_taxref",
+   "yea_year"
+  ],
+  "std": [
+   "std_message"
+  ],
+  "fss": [
+   "fss_errors"
+  ],
+  "fsse": [
+   "fsse_form_serial",
+   "fsse_fss_form"
+  ],
+  "uni": [
+   "uni_desc",
+   "uni_value"
+  ],
+  "ds": [
+   "ds_error_list"
+  ]
+ },
+ "prefix_to_table_automap": {
+  "bop": "bop",
+  "cat": "category",
+  "loc": "locality",
+  "str": "street",
+  "cou": "country",
+  "ret": "return",
+  "con": "contact",
+  "not": "note",
+  "note": "note",
+  "acc": "accountperiod",
+  "adm": "administrator",
+  "rea": "reason",
+  "inc": "incentive",
+  "fou": "foundation",
+  "std": "std_message",
+  "fss": "fss_errors",
+  "uni": "uniquekey"
+ },
+ "unmapped_prefixes_for_human": [
+  "bym",
+  "cdn",
+  "cin",
+  "em",
+  "fsse",
+  "ird",
+  "par",
+  "rol",
+  "sbc",
+  "tax",
+  "wfl",
+  "yea"
+ ]
+}

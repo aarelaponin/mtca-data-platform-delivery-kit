@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: stg_vat__registration
+  description: One row per VAT registration.
+  columns:
+  - name: taxpayer_id
+    description: Grain / primary key.
+    tests:
+    - unique
+    - not_null

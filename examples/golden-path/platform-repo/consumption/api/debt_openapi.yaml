@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: MTCA debt API
+  version: 0.1.0
+  description: Read API over Gold marts for the debt consumer.
+servers:
+- url: https://api.mtca.internal
+paths:
+  /api/debt/aged-balances:
+    get:
+      summary: Aged debt balances for a taxpayer or above a threshold.
+      operationId: debt_aged_balances
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: taxpayer_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ''
+      - name: min_balance
+        in: query
+        required: false
+        schema:
+          type: number
+        description: ''
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          maximum: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MartDebtAgedBalances'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: keycloak access token
+  schemas:
+    MartDebtAgedBalances:
+      type: object
+      properties:
+        taxpayer_id:
+          type: string
+        taxpayer_name:
+          type: string
+        balance:
+          type: number
+security:
+- bearerAuth: []
+x-rbac-roles:
+- debt_officer

@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: mart_debt__aged_balances
+  description: Aged debt balances per taxpayer for the Debt dashboard and API.
+  columns:
+  - name: taxpayer_id
+    description: Grain / primary key.
+    tests:
+    - unique
+    - not_null

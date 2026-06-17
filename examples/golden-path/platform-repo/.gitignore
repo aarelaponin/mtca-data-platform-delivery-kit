@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.uv/
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# secrets & env — example files are tracked, real ones never are
+.env
+*.env
+dbt/profiles.yml
+!dbt/profiles.example.yml
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*~
+.idea/
+.vscode/*
+!.vscode/extensions.json

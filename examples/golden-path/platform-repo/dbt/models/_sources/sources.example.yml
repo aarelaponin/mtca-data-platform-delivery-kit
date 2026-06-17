@@ -1,0 +1,9 @@
+# Declare each ingested source so staging models can ref() it and lineage is captured.
+version: 2
+sources:
+  - name: bronze
+    schema: bronze
+    description: "Raw, as-ingested layer (Informix -> ClickHouse)."
+    tables:
+      - name: example_source_table
+        description: "TODO: describe; one staging model (stg_) per source table."

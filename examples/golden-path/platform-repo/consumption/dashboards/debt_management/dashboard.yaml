@@ -1,0 +1,35 @@
+dashboard_title: Debt Management
+slug: debt_management
+_meta:
+  generated: '2026-06-17'
+  note: Charts + RBAC + alerts. Realise the layout in Superset from these chart definitions; datasets
+    import directly.
+rbac_roles:
+- debt_officer
+- debt_manager
+charts:
+- name: Top debtors
+  viz_type: table
+  dataset: debt_aged_balances
+  metric: null
+  dimension: null
+  columns:
+  - taxpayer_name
+  - balance
+  filters: []
+  row_limit: 1000
+- name: Outstanding
+  viz_type: big_number_total
+  dataset: debt_aged_balances
+  metric: total_outstanding
+  dimension: null
+  columns: null
+  filters: []
+  row_limit: 1000
+alerts:
+- name: ageing shift
+  dataset: debt_aged_balances
+  metric: total_outstanding
+  condition: '>'
+  threshold: 1000000
+  note: watch growth

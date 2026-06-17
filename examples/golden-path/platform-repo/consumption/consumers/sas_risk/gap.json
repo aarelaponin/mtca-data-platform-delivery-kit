@@ -1,0 +1,69 @@
+{
+ "consumer": "sas-risk",
+ "served": {
+  "taxpayer_id": [
+   "mart_debt__aged_balances",
+   "int_taxpayer__master"
+  ],
+  "taxpayer_name": [
+   "mart_debt__aged_balances",
+   "int_taxpayer__master"
+  ],
+  "segment": [
+   "int_taxpayer__master"
+  ],
+  "vat_paid": [
+   "int_taxpayer__master"
+  ]
+ },
+ "missing": [],
+ "surface": "feed",
+ "checklist": [
+  {
+   "id": "needs-captured",
+   "item": "Consumer data needs captured (entities, fields, metrics, surface, freshness)",
+   "status": "pass"
+  },
+  {
+   "id": "gaps-resolved",
+   "item": "No gaps \u2014 all needs served by existing Gold marts",
+   "status": "pass"
+  },
+  {
+   "id": "surface-exposed",
+   "item": "Consumption surface exposed (feed)",
+   "status": "pending"
+  },
+  {
+   "id": "writeback-wired",
+   "item": "Write-back mart(s) modelled, DQ'd and verified",
+   "status": "pending"
+  },
+  {
+   "id": "rbac-set",
+   "item": "RBAC roles granted; classification inherited",
+   "status": "pending"
+  },
+  {
+   "id": "dq-green",
+   "item": "DQ gates green on every consumed/written mart",
+   "status": "pending"
+  },
+  {
+   "id": "catalogue-verified",
+   "item": "Catalogue VERIFIED for the consumed/written columns",
+   "status": "pending"
+  },
+  {
+   "id": "readiness",
+   "item": "production-readiness-check PASS for the consumer release",
+   "status": "pending"
+  },
+  {
+   "id": "sign-off",
+   "item": "Consumer sign-off recorded",
+   "status": "pending"
+  }
+ ],
+ "generated": "2026-06-17"
+}

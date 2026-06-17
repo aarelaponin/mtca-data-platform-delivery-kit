@@ -1,0 +1,12 @@
+{ "source": "ird",
+  "tables": {
+    "taxpayer": { "row_count": 1234567, "primary_key": ["tax_serial"],
+      "columns": [
+        {"name":"tax_serial","type":"serial","nullable":false},
+        {"name":"tax_name","type":"varchar(120)","nullable":true},
+        {"name":"tax_segment","type":"varchar(20)","nullable":true},
+        {"name":"tax_balance","type":"decimal(16,2)","nullable":true},
+        {"name":"tax_assessment","type":"decimal(16,2)","nullable":true}
+      ]}
+  }
+}

@@ -1,0 +1,48 @@
+version: 2
+models:
+- name: mart_debt__aged_balances
+  description: DQ checks for the debt aged-balances mart.
+  columns:
+  - name: taxpayer_id
+    tests:
+    - unique:
+        config:
+          tags:
+          - dq:uniqueness
+          meta:
+            dq_dimension: uniqueness
+            control: DQC-S4-01
+    - not_null:
+        config:
+          tags:
+          - dq:completeness
+          meta:
+            dq_dimension: completeness
+            control: DQC-S4-01
+    - relationships:
+        config:
+          tags:
+          - dq:consistency
+          meta:
+            dq_dimension: consistency
+            control: DQC-S4-03
+        to: ref('int_taxpayer__master')
+        field: taxpayer_id
+  - name: balance
+    tests:
+    - not_null:
+        config:
+          tags:
+          - dq:completeness
+          meta:
+            dq_dimension: completeness
+            control: DQC-S4-02
+    - dbt_expectations.expect_column_values_to_be_between:
+        config:
+          tags:
+          - dq:validity
+          meta:
+            dq_dimension: validity
+            control: DQC-S4-02
+        min_value: 0
+

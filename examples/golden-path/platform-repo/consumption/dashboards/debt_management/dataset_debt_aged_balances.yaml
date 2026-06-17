@@ -1,0 +1,34 @@
+version: 1.0.0
+uuid: 05632042-ce2d-49eb-ba23-683d860257a8
+table_name: debt_aged_balances
+schema: gold
+sql: select * from gold.mart_debt__aged_balances
+main_dttm_col: null
+database_uuid: REPLACE_ON_IMPORT
+cache_timeout: null
+columns:
+- column_name: taxpayer_id
+  is_dttm: false
+  type: VARCHAR
+- column_name: taxpayer_name
+  is_dttm: false
+  type: VARCHAR
+- column_name: balance
+  is_dttm: false
+  type: VARCHAR
+- column_name: assessment_total
+  is_dttm: false
+  type: VARCHAR
+- column_name: debt_to_assessment
+  expression: balance / nullif(assessment_total, 0)
+  description: Debt-to-assessment ratio
+  is_dttm: false
+metrics:
+- metric_name: total_outstanding
+  expression: sum(balance)
+  description: Total outstanding debt
+  extra: '{"dq_note": "one definition, reused everywhere"}'
+- metric_name: debtor_count
+  expression: count(distinct taxpayer_id)
+  description: Distinct debtors
+  extra: '{"dq_note": "one definition, reused everywhere"}'

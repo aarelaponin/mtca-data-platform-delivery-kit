@@ -1,0 +1,36 @@
+version: 2
+sources:
+- name: bronze
+  schema: bronze
+  description: Raw, as-ingested layer for source 'ird' (Informix -> ClickHouse).
+  tables:
+  - name: ird__taxpayer
+    description: Bronze copy of ird.taxpayer (raw, as-ingested).
+    columns:
+    - name: tax_serial
+      description: TODO — verify via verify-catalogue-semantics.
+      meta:
+        source_type: serial
+        ch_type: Int64
+    - name: tax_name
+      description: TODO — verify via verify-catalogue-semantics.
+      meta:
+        source_type: varchar(120)
+        ch_type: String
+    - name: tax_segment
+      description: TODO — verify via verify-catalogue-semantics.
+      meta:
+        source_type: varchar(20)
+        ch_type: String
+    - name: tax_balance
+      description: TODO — verify via verify-catalogue-semantics.
+      meta:
+        source_type: decimal(16,2)
+        ch_type: Decimal(38, 2)
+    - name: tax_assessment
+      description: TODO — verify via verify-catalogue-semantics.
+      meta:
+        source_type: decimal(16,2)
+        ch_type: Decimal(38, 2)
+    meta:
+      source_row_count_at_onboard: 1234567

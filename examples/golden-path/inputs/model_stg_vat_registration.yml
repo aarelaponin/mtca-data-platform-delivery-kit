@@ -1,0 +1,10 @@
+kind: staging
+source: vat
+table: registration
+key: taxpayer_id
+description: One row per VAT registration.
+columns:
+  - {src: vat_taxref, as: taxpayer_id, cast: Int64}
+  - {src: vat_no, as: vat_no}
+  - {src: vat_declared, as: vat_declared, cast: "Decimal(38,2)"}
+  - {src: vat_paid, as: vat_paid, cast: "Decimal(38,2)"}

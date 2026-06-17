@@ -1,0 +1,7 @@
+kind: mart
+domain: debt
+desc: aged_balances
+key: taxpayer_id
+description: Aged debt balances per taxpayer for the Debt dashboard and API.
+from: int_taxpayer__master
+select: [taxpayer_id, taxpayer_name, balance, assessment_total]

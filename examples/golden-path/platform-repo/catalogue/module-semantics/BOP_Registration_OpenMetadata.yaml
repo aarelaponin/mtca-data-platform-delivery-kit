@@ -1,0 +1,433 @@
+_meta:
+  title: OpenMetadata semantic enrichment — BOP_Registration module
+  generated: '2026-06-17'
+  source: Static analysis of bopindex.pbl (DataWindow + embedded SQL).
+  status: DRAFT SCAFFOLD — table/business-column descriptions are TODO; complete them from naming
+    + domain, then VERIFY against an authoritative source before publishing (catalogue control).
+    Authoritative data types come from the catalogue connector; 'inferredType' is a hint only.
+service: <your-om-database-service>
+application:
+  name: BOP_Registration
+  description: TODO — what this module does (one paragraph).
+  usesTables:
+  - accountperiod
+  - administrator
+  - application
+  - bop
+  - category
+  - codednote
+  - coincentive
+  - contact
+  - country
+  - foundation
+  - incentive
+  - list
+  - locality
+  - note
+  - parameter
+  - reason
+  - return
+  - sect
+  - std_message
+  - street
+  - taxpayer
+  - bopyearmember
+  - fss_errors
+  - partner
+  - taxpayerlock
+  - uniquekey
+  - whitefile
+tables:
+- name: accountperiod
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 10
+  columns:
+  - name: acc_date
+    description: (to confirm with the Data Owner)
+    inferredType: datetime
+  - name: acc_period
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: acc_permit
+    description: (to confirm with the Data Owner)
+    inferredType: char
+  - name: acc_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+  - name: acc_taxref
+    description: Taxpayer reference (foreign key to the taxpayer table).
+    inferredType: varchar
+  - name: acc_timestamp
+    description: Row last-modified timestamp (audit).
+    inferredType: datetime
+  - name: acc_userid
+    description: User who last modified the row (audit).
+    inferredType: varchar
+  - name: acc_year
+    description: Year.
+    inferredType: integer
+  - name: acc_yrfrom
+    description: Effective from (year).
+    inferredType: varchar
+  - name: acc_yrto
+    description: Effective to (year).
+    inferredType: varchar
+- name: administrator
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 2
+  columns:
+  - name: adm_desc
+    description: Description / display text.
+    inferredType: varchar
+  - name: adm_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: application
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: bop
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 8
+  columns:
+  - name: bop_activity
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: bop_assoctaxref
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: bop_bop_name
+    description: Name.
+    inferredType: varchar
+  - name: bop_name
+    description: Name.
+    inferredType: varchar
+  - name: bop_sbcref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: bop_taxref
+    description: Taxpayer reference (foreign key to the taxpayer table).
+    inferredType: varchar
+  - name: bop_tpref
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: bop_vat
+    description: (to confirm with the Data Owner)
+    inferredType: char
+- name: category
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 4
+  columns:
+  - name: cat_desc
+    description: Description / display text.
+    inferredType: varchar
+  - name: cat_prefix
+    description: Code prefix used in numbering.
+    inferredType: varchar
+  - name: cat_scope
+    description: Applicability scope of the reference value.
+    inferredType: varchar
+  - name: cat_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: codednote
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: coincentive
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: contact
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 16
+  columns:
+  - name: con_email
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: con_fax
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: con_locref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: con_name
+    description: Name.
+    inferredType: varchar
+  - name: con_phone1
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: con_phone2
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: con_postcode
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: con_rolref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: con_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+  - name: con_street
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: con_strref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: con_taxref
+    description: Taxpayer reference (foreign key to the taxpayer table).
+    inferredType: varchar
+  - name: con_timestamp
+    description: Row last-modified timestamp (audit).
+    inferredType: datetime
+  - name: con_userid
+    description: User who last modified the row (audit).
+    inferredType: varchar
+  - name: con_yrfrom
+    description: Effective from (year).
+    inferredType: varchar
+  - name: con_yrto
+    description: Effective to (year).
+    inferredType: varchar
+- name: country
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 2
+  columns:
+  - name: cou_name
+    description: Name.
+    inferredType: varchar
+  - name: cou_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: foundation
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 5
+  columns:
+  - name: fou_firstadmindate
+    description: (to confirm with the Data Owner)
+    inferredType: datetime
+  - name: fou_prno
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: fou_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+  - name: fou_taxref
+    description: Taxpayer reference (foreign key to the taxpayer table).
+    inferredType: varchar
+  - name: fou_vono
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+- name: incentive
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 3
+  columns:
+  - name: inc_desc
+    description: Description / display text.
+    inferredType: varchar
+  - name: inc_scope
+    description: Applicability scope of the reference value.
+    inferredType: varchar
+  - name: inc_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: list
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: locality
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 6
+  columns:
+  - name: loc_couref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: loc_name
+    description: Name.
+    inferredType: varchar
+  - name: loc_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+  - name: loc_taxref
+    description: Taxpayer reference (foreign key to the taxpayer table).
+    inferredType: varchar
+  - name: loc_timestamp
+    description: Row last-modified timestamp (audit).
+    inferredType: datetime
+  - name: loc_userid
+    description: User who last modified the row (audit).
+    inferredType: varchar
+- name: note
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 15
+  columns:
+  - name: not_codref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: not_docs
+    description: (to confirm with the Data Owner)
+    inferredType: char
+  - name: not_freetext
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: not_irdsect
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: not_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+  - name: not_taxref
+    description: Taxpayer reference (foreign key to the taxpayer table).
+    inferredType: varchar
+  - name: not_timestamp
+    description: Row last-modified timestamp (audit).
+    inferredType: datetime
+  - name: not_userid
+    description: User who last modified the row (audit).
+    inferredType: varchar
+  - name: not_yrfrom
+    description: Effective from (year).
+    inferredType: varchar
+  - name: not_yrto
+    description: Effective to (year).
+    inferredType: varchar
+  - name: note_not_docs
+    description: (to confirm with the Data Owner)
+    inferredType: char
+  - name: note_not_userid
+    description: User who last modified the row (audit).
+    inferredType: varchar
+  - name: note_not_yrfrom
+    description: Effective from (year).
+    inferredType: varchar
+  - name: note_not_yrto
+    description: Effective to (year).
+    inferredType: varchar
+  - name: note_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: parameter
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: reason
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 3
+  columns:
+  - name: rea_desc
+    description: Description / display text.
+    inferredType: varchar
+  - name: rea_scope
+    description: Applicability scope of the reference value.
+    inferredType: varchar
+  - name: rea_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: return
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 3
+  columns:
+  - name: ret_desc
+    description: Description / display text.
+    inferredType: varchar
+  - name: ret_scope
+    description: Applicability scope of the reference value.
+    inferredType: varchar
+  - name: ret_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: sect
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: std_message
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 1
+  columns:
+  - name: std_message
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+- name: street
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 5
+  columns:
+  - name: str_locref
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+  - name: str_name1
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: str_name2
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: str_postcode
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+  - name: str_serial
+    description: Surrogate primary key (system-generated serial).
+    inferredType: integer
+- name: taxpayer
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: true
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: bopyearmember
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: false
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: fss_errors
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: false
+  columnsReferencedByModule: 1
+  columns:
+  - name: fss_errors
+    description: (to confirm with the Data Owner)
+    inferredType: varchar
+- name: partner
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: false
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: taxpayerlock
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: false
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)
+- name: uniquekey
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: false
+  columnsReferencedByModule: 2
+  columns:
+  - name: uni_desc
+    description: Description / display text.
+    inferredType: varchar
+  - name: uni_value
+    description: (to confirm with the Data Owner)
+    inferredType: integer
+- name: whitefile
+  description: TODO — business description (Data-Owner to confirm).
+  confirmedAgainstInventory: false
+  columnsReferencedByModule: 0
+  columns: (no columns resolved from static analysis — confirm from the connector)

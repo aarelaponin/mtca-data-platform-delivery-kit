@@ -1,0 +1,11 @@
+kind: staging
+source: ird
+table: taxpayer
+key: taxpayer_id
+description: One row per taxpayer from the IRD taxpayer table.
+columns:
+  - {src: tax_serial, as: taxpayer_id, cast: Int64}
+  - {src: tax_name, as: taxpayer_name}
+  - {src: tax_segment, as: segment}
+  - {src: tax_balance, as: balance, cast: "Decimal(38,2)"}
+  - {src: tax_assessment, as: assessment_total, cast: "Decimal(38,2)"}

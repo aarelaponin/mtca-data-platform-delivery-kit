@@ -1,0 +1,54 @@
+release: debt-v1.0-golden-path
+repo: /sessions/pensive-elegant-clarke/mnt/mt-tca-prj/kp-dataplatform-delivery-kit/examples/golden-path/platform-repo
+note: 'Fill each attestation: status pass|fail|na, plus evidence/signed_by/date. Auto
+  items (CI, runbook, rollback, DQ, RBAC, alerts, secrets) are computed from the repo.'
+attestations:
+  DEPLOY-2:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: Deployed to test and promoted via the pipeline
+    _severity: blocker
+  MON-1:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: Monitoring dashboards live (Prometheus/Grafana)
+    _severity: blocker
+  SEC-2:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: DPIA / DPO clearance for real (Restricted) data
+    _severity: blocker
+  DQ-2:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: Catalogue descriptions VERIFIED for every handover/mart column
+    _severity: blocker
+  OPS-2:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: Freshness SLAs defined per tier
+    _severity: warn
+  UAT-1:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: Consumer (debt team) UAT signed off
+    _severity: blocker
+  GOV-1:
+    status: pass
+    evidence: golden-path demo
+    signed_by: example
+    date: '2026-06-17'
+    _title: Go-live sign-off recorded (DGC/owner)
+    _severity: blocker

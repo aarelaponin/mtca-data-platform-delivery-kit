@@ -1,0 +1,15 @@
+api:
+  name: debt
+  base_path: /api/debt
+  auth: keycloak
+  gold_schema: gold
+endpoints:
+  - path: /aged-balances
+    mart: mart_debt__aged_balances
+    method: get
+    description: Aged debt balances for a taxpayer or above a threshold.
+    fields: [taxpayer_id, taxpayer_name, {name: balance, type: number}]
+    filters:
+      - {name: taxpayer_id, type: string, column: taxpayer_id, op: "="}
+      - {name: min_balance, type: number, column: balance, op: ">="}
+rbac: [debt_officer]

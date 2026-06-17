@@ -1,0 +1,13 @@
+model: mart_debt__aged_balances
+tier: hot
+description: DQ checks for the debt aged-balances mart.
+grain: [taxpayer_id]
+mandatory: [taxpayer_id, balance]
+ranges:
+  balance: {min: 0}
+relationships:
+  - {column: taxpayer_id, to: "ref('int_taxpayer__master')", field: taxpayer_id}
+freshness: {column: _extracted_at}
+row_budget: {min_rows: 1}
+accuracy:
+  - {name: vat_chain, description: "VAT declared vs paid reconciliation within tolerance"}

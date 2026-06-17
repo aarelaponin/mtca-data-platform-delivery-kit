@@ -1,0 +1,12 @@
+# Copy to dbt/profiles.yml (gitignored) and fill in real credentials, or point DBT_PROFILES_DIR here.
+mtca_platform:
+  target: dev
+  outputs:
+    dev:
+      type: clickhouse
+      host: "{{ env_var('CLICKHOUSE_HOST', 'localhost') }}"
+      port: 9000
+      user: "{{ env_var('CLICKHOUSE_USER', 'default') }}"
+      password: "{{ env_var('CLICKHOUSE_PASSWORD', '') }}"
+      schema: dev
+      secure: false

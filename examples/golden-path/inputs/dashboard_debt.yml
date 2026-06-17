@@ -1,0 +1,16 @@
+dashboard: Debt Management
+dataset:
+  name: debt_aged_balances
+  mart: mart_debt__aged_balances
+  columns: [taxpayer_id, taxpayer_name, balance, assessment_total]
+  calculated:
+    - {name: debt_to_assessment, expression: "balance / nullif(assessment_total, 0)", description: "Debt-to-assessment ratio"}
+  metrics:
+    - {name: total_outstanding, expression: "sum(balance)", description: "Total outstanding debt"}
+    - {name: debtor_count, expression: "count(distinct taxpayer_id)", description: "Distinct debtors"}
+charts:
+  - {name: Top debtors, type: table, dataset: debt_aged_balances, columns: [taxpayer_name, balance]}
+  - {name: Outstanding, type: big_number, dataset: debt_aged_balances, metric: total_outstanding}
+rbac: {roles: [debt_officer, debt_manager]}
+alerts:
+  - {name: ageing shift, dataset: debt_aged_balances, metric: total_outstanding, condition: ">", threshold: 1000000, note: "watch growth"}

@@ -1,0 +1,36 @@
+service: mtca-clickhouse
+database: bronze
+schema: bronze
+_meta:
+  generated: '2026-06-17'
+  note: Technical metadata only; OM's ClickHouse connector is authoritative for types. Business descriptions
+    are added/verified separately.
+tables:
+- name: ird__taxpayer
+  description: ''
+  columns:
+  - name: tax_serial
+    dataType: Int64
+    nullable: false
+    sourceType: serial
+    description: ''
+  - name: tax_name
+    dataType: String
+    nullable: true
+    sourceType: varchar(120)
+    description: ''
+  - name: tax_segment
+    dataType: String
+    nullable: true
+    sourceType: varchar(20)
+    description: ''
+  - name: tax_balance
+    dataType: Decimal(38, 2)
+    nullable: true
+    sourceType: decimal(16,2)
+    description: ''
+  - name: tax_assessment
+    dataType: Decimal(38, 2)
+    nullable: true
+    sourceType: decimal(16,2)
+    description: ''

@@ -1,0 +1,19 @@
+kind: intermediate
+domain: taxpayer
+concept: master
+key: taxpayer_id
+description: Taxpayer-360 golden record joining IRD identity and VAT registration on TIN.
+base: stg_ird__taxpayer
+joins:
+  - {model: stg_vat__registration, type: left, "on": "stg_ird__taxpayer.taxpayer_id = stg_vat__registration.taxpayer_id"}
+select:
+  - stg_ird__taxpayer.taxpayer_id
+  - stg_ird__taxpayer.taxpayer_name
+  - stg_ird__taxpayer.segment
+  - stg_ird__taxpayer.balance
+  - stg_ird__taxpayer.assessment_total
+  - stg_vat__registration.vat_no
+  - stg_vat__registration.vat_declared
+  - stg_vat__registration.vat_paid
+relationships:
+  - {column: taxpayer_id, to: "ref('stg_ird__taxpayer')", field: taxpayer_id}

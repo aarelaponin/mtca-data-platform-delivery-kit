@@ -1,0 +1,14 @@
+consumer:
+  name: sas-risk
+  description: SAS VIYA risk scoring — the platform's second consumer.
+  surface: feed
+  freshness: warm
+  writes_back:
+    - {mart: mart_risk__scores, fields: [taxpayer_id, risk_score, risk_band]}
+needs:
+  - entity: taxpayer
+    fields: [taxpayer_id, taxpayer_name, segment]
+    metrics: []
+  - entity: vat
+    fields: [vat_paid]
+rbac: [sas_analyst, risk_modeller]

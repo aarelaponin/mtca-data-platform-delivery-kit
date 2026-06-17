@@ -1,0 +1,10 @@
+version: 2
+models:
+- name: stg_ird__taxpayer
+  description: One row per taxpayer from the IRD taxpayer table.
+  columns:
+  - name: taxpayer_id
+    description: Grain / primary key.
+    tests:
+    - unique
+    - not_null

@@ -1,0 +1,24 @@
+model: mart_debt__aged_balances
+tier: hot
+note: DQF proposed targets — CONFIRM with Data Owners & DGC.
+dimensions:
+  completeness:
+    poc_target: ≥95% mandatory fill; ≥99% rows reconciled
+    full_target: ≥99% fill; 100% reconciled
+  validity:
+    poc_target: ≥99% rows pass validity
+    full_target: ≥99.5%
+  accuracy:
+    poc_target: reconciliations defined & measured
+    full_target: tolerance bands agreed & met
+    status: not_implemented (reconciliation stub generated)
+  consistency:
+    poc_target: ≥98% cross-reference match
+    full_target: + cross-DB FK ≥ agreed floor
+  uniqueness:
+    poc_target: <1% duplicates; 100% at grain post-dedup
+    full_target: 100%
+  timeliness:
+    poc_target: freshness visible; tier SLAs defined
+    full_target: per-tier SLAs met
+

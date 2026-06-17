@@ -1,0 +1,14 @@
+vocabulary: taxpayer_status
+source_table: taxpayer_status.csv
+term_count: 3
+accepted_values:
+- '1'
+- '2'
+- '3'
+terms:
+- code: '1'
+  label: Active
+- code: '2'
+  label: Dormant
+- code: '3'
+  label: Closed

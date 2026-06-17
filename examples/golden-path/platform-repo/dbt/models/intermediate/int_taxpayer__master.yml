@@ -1,0 +1,13 @@
+version: 2
+models:
+- name: int_taxpayer__master
+  description: Taxpayer-360 golden record joining IRD identity and VAT registration on TIN.
+  columns:
+  - name: taxpayer_id
+    description: Grain / primary key.
+    tests:
+    - unique
+    - not_null
+    - relationships:
+        to: ref('stg_ird__taxpayer')
+        field: taxpayer_id

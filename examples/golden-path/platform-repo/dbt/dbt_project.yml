@@ -1,0 +1,22 @@
+name: 'mtca_platform'
+version: '1.0.0'
+config-version: 2
+profile: 'mtca_platform'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  mtca_platform:
+    staging:
+      +materialized: view
+      +schema: silver
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: gold

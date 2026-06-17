@@ -1,0 +1,3 @@
+marts:
+  mart_debt__aged_balances: [taxpayer_id, taxpayer_name, balance, assessment_total]
+  int_taxpayer__master: [taxpayer_id, taxpayer_name, segment, vat_no, vat_declared, vat_paid]
