@@ -95,7 +95,8 @@ Start at `docs/skill-pack-index.md` for the install guide and the 13-skill deliv
 
 ### dist/
 **Easiest install — one plugin:** `mtca-data-platform.plugin` bundles all 13 skills; install it once
-in Claude Desktop (Cowork) and the whole pack is available. (New to the kit? Read `docs/handover-brief.md`.)
+in Claude Desktop (Cowork) and the whole pack is available. (New to the kit? Read `docs/handover-brief.md`;
+to actually build the platform end-to-end, follow `docs/developers-guide.md`.)
 
 Or install skills individually — open a `.skill` and choose **Save skill**:
 - `mtca-architecture-principles.skill`
