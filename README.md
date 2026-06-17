@@ -47,6 +47,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   model: dimension-tagged dbt schema tests (uniqueness/completeness/validity/consistency) + singular
   tests (timeliness freshness vs tier SLA, completeness row-budget, accuracy reconciliation stub) +
   the per-dimension threshold config that feeds the 0–100 quality badge. `gen_dq_checks.py`.
+- `production-readiness-check/` — **go-live gate skill (built & validated).** The Production-Readiness
+  Checklist as an evidence-driven gate: auto-checks repo artifacts (CI, runbook, rollback, DQ, RBAC,
+  alerts, secrets) + signed attestations (UAT, DPIA, monitoring, sign-off) → a hard pass/fail with a
+  report. `prodcheck.py`.
 - `build-superset-dashboard/` — **consumption skill (built & validated).** Spec → a Superset dataset
   (virtual-dataset SQL + calculated columns + reusable metrics defined once) + a dashboard manifest
   (charts, RBAC roles, threshold alerts) over a Gold mart. `gen_superset.py`.
@@ -80,6 +84,7 @@ Packaged, installable skills — open one in Claude Desktop (Cowork) and choose 
 - `onboard-source.skill`
 - `build-dbt-model.skill`
 - `add-dq-checks.skill`
+- `production-readiness-check.skill`
 - `build-superset-dashboard.skill`
 - `expose-api.skill`
 - `import-schema-to-catalogue.skill`
