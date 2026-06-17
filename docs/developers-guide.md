@@ -349,27 +349,29 @@ deterministic; `mtca-architecture-principles` settles design choices by citation
 contracts, the DQ gates and the verification gate catch divergence automatically. So the job is to
 **split work so people don't collide, and review each other** — not to make everyone do the same thing.
 
-**Split by vertical ownership, not by horizontal layer.** Don't have one person do "all staging" and
-another "all marts" — that creates wait-chains and blurred ownership. Instead:
+**Keep your domain ownership — own a domain end-to-end.** The team already splits responsibility by
+**domain** (e.g. one developer for income tax / IRD, one for VAT, one for customs/excise), and that is
+the right model — keep it. Each developer carries their domain through the **whole loop**: onboard its
+sources → model `stg_`/`int_`/`mart_` → DQ → catalogue & verify → expose the surface → gate. Vertical,
+end-to-end ownership means few hand-offs and one clear owner per slice — far better than splitting by
+layer ("all staging" vs "all marts"), which creates wait-chains and blurred ownership.
 
-- **The first (Debt) slice: build it together.** One developer drives, the other two review, **rotating
-  the keyboard per milestone** (M1 ingestion → M2/M3 modelling → M4/M5 consumption → M6 go-live). Everyone
-  sees the whole path once. This is the shadow → pair → lead start, and it sets the patterns the rest of
-  the work copies.
-- **After the patterns are proven: parallelise by ownership.** Two workable splits:
-    - *By role* — **Dev A** ingestion & catalogue (`onboard-source`, `import-schema-to-catalogue`,
-      `legacy-module-to-openmetadata`, `verify-catalogue-semantics`); **Dev B** modelling & quality
-      (`build-dbt-model`, `add-dq-checks`); **Dev C** consumption & ops (`build-superset-dashboard`,
-      `expose-api`, CI/monitoring, `production-readiness-check`).
-    - *By source/domain* (better once you're doing breadth) — each developer owns a **source or mart
-      family end-to-end** through the whole loop. Fewer hand-offs; each person carries their slice from
-      Bronze to a green gate.
+- **Build the first Debt slice together first.** Before splitting fully, build one slice as a team —
+  one developer drives, the other two review, **rotating the keyboard per milestone** (M1 ingestion →
+  M2/M3 modelling → M4/M5 consumption → M6 go-live). Everyone sees the whole path once; this is the
+  shadow → pair → lead start, and it sets the patterns each domain then copies.
+- **Then run domains in parallel** — each owner builds their domain with the same skills, conventions
+  and gates, so the outputs match by construction.
 
-**Appoint one owner for the shared core.** The biggest consistency risk is two people defining the same
-thing differently. Give **one developer (rotating) ownership of the single-source-of-truth pieces** —
-`int_taxpayer__master` (Taxpayer-360), the shared metric definitions, the naming conventions, and the
-`main` branch. Nobody else changes those without that owner's review. Everyone else **composes from**
-them (P6: pull from Gold, one definition per fact).
+**The real consistency risk with a domain split is the shared, cross-domain core — give it one owner.**
+Some things are not owned by any single domain because every domain uses them: the **Taxpayer-360
+golden record** (`int_taxpayer__master`, which joins identity across domains on TIN), the **shared
+metric definitions** (e.g. `total_outstanding`, ageing bands), the shared **reference vocabularies**,
+the **naming conventions**, and the **`main`** branch. Appoint **one rotating "platform steward"** to own
+these. **Domain owners compose from them and request changes by PR — they never fork or redefine them**
+(P6: one definition per fact, pull from Gold). A cross-domain mart (e.g. one joining debt + VAT) is built
+from the domain `int_` models, with the steward reviewing the join. This single rule prevents the classic
+failure of three domains each inventing their own "taxpayer".
 
 **Git is the consistency backbone** (this is where parallel work converges):
 
