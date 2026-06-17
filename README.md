@@ -47,6 +47,10 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   model: dimension-tagged dbt schema tests (uniqueness/completeness/validity/consistency) + singular
   tests (timeliness freshness vs tier SLA, completeness row-budget, accuracy reconciliation stub) +
   the per-dimension threshold config that feeds the 0–100 quality badge. `gen_dq_checks.py`.
+- `onboard-consumer/` — **consumer onboarding skill (built & validated).** Diffs a consumer's data
+  needs against the current Gold marts → gap analysis + a tailored onboarding plan (which gaps to
+  build with which skills, which surface to expose) + the consumer Definition-of-Done. Enforces
+  pull-from-Gold (no side-pipelines). SAS risk as the worked second consumer. `gen_consumer_plan.py`.
 - `production-readiness-check/` — **go-live gate skill (built & validated).** The Production-Readiness
   Checklist as an evidence-driven gate: auto-checks repo artifacts (CI, runbook, rollback, DQ, RBAC,
   alerts, secrets) + signed attestations (UAT, DPIA, monitoring, sign-off) → a hard pass/fail with a
@@ -84,6 +88,7 @@ Packaged, installable skills — open one in Claude Desktop (Cowork) and choose 
 - `onboard-source.skill`
 - `build-dbt-model.skill`
 - `add-dq-checks.skill`
+- `onboard-consumer.skill`
 - `production-readiness-check.skill`
 - `build-superset-dashboard.skill`
 - `expose-api.skill`
