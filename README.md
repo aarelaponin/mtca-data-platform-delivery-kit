@@ -47,6 +47,12 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   model: dimension-tagged dbt schema tests (uniqueness/completeness/validity/consistency) + singular
   tests (timeliness freshness vs tier SLA, completeness row-budget, accuracy reconciliation stub) +
   the per-dimension threshold config that feeds the 0–100 quality badge. `gen_dq_checks.py`.
+- `build-superset-dashboard/` — **consumption skill (built & validated).** Spec → a Superset dataset
+  (virtual-dataset SQL + calculated columns + reusable metrics defined once) + a dashboard manifest
+  (charts, RBAC roles, threshold alerts) over a Gold mart. `gen_superset.py`.
+- `expose-api/` — **consumption skill (built & validated).** Spec → an OpenAPI 3.0 contract +
+  parameterized SQL for read endpoints over a Gold mart (for the DMBB/Joget consumer), with Keycloak
+  bearer auth + RBAC. Contract and SQL generated together so they can't drift. `gen_api.py`.
 - `import-schema-to-catalogue/` — **catalogue structure skill (built & validated).** Schema spec →
   dbt `sources.yml` (with ClickHouse-type meta) + OpenMetadata technical-metadata import + reference
   vocabularies (code→label + `accepted_values` for validity tests). The *technical* half of cataloguing;
@@ -74,6 +80,8 @@ Packaged, installable skills — open one in Claude Desktop (Cowork) and choose 
 - `onboard-source.skill`
 - `build-dbt-model.skill`
 - `add-dq-checks.skill`
+- `build-superset-dashboard.skill`
+- `expose-api.skill`
 - `import-schema-to-catalogue.skill`
 - `verify-catalogue-semantics.skill`
 - `legacy-module-to-openmetadata.skill`
