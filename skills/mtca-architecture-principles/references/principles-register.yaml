@@ -1,0 +1,104 @@
+# MTCA Data Platform — Architectural Principles Register (v0.1)
+# Numbered, priority-ordered, CITABLE. Distilled from the Data Platform Blueprint and the DQF.
+# These settle "X-or-Y / build-or-buy / now-or-later" decisions by citation; they are deliberately
+# silent on tactical questions (file paths, syntax, ops). Confirm/extend with the DGC.
+version: "0.1"
+principles:
+  - id: P1
+    title: Open-source, no lock-in
+    statement: >-
+      Prefer open-source, on-platform components; choose tools for the workload, not because a
+      licence is already held. An existing licence is a cost fact, not an architecture reason.
+    rationale: >-
+      Lock-in and per-seat licensing constrain a platform that must serve the whole estate for years;
+      open components keep capability with MTCA.
+    cites: [Blueprint design principles]
+    example: >-
+      "We already own SAS" does not make SAS the data-quality tool — DQ is owned by dbt + OpenMetadata;
+      SAS is a Gold consumer (P2/P9).
+  - id: P2
+    title: One comprehensive platform; ingest once, serve many
+    statement: >-
+      The platform ingests and catalogues ALL of MTCA's data once and serves every consumer from the
+      shared layers. Modules are consumers in sequence (Debt first, SAS second, …), not separate builds.
+    rationale: Avoids N drifting copies of the same data and N places to fix a bug.
+    cites: [Blueprint, content design §framing]
+    example: A new consumer's unmet need becomes a shared Gold mart, never a private side-pipeline (P6).
+  - id: P3
+    title: Classification is foundational; Restricted-by-default
+    statement: >-
+      Data classification is set first and cascades; access is least-privilege via Keycloak RBAC; a
+      DPIA/DPO clearance gates the use of real Restricted data.
+    rationale: Tax data is sensitive; protection is a precondition of production, not an add-on.
+    cites: [Blueprint security, DQF §7, MITA AI-10/SEC-02, GDPR Art.35]
+    example: No go-live on real data without the DPO's DPIA (production-readiness SEC-2).
+  - id: P4
+    title: Automation-first
+    statement: Prefer deterministic generation and repeatable cookbooks/skills over manual steps.
+    rationale: Manual steps don't scale to 5,170+ tables and don't survive staff turnover.
+    cites: [content design, ARMS]
+    example: Models, DDL, tests, catalogue input are generated from specs, not hand-built.
+  - id: P5
+    title: Generated artefacts are never hand-edited
+    statement: If a skill/generator produced it, fix the spec or the generator and regenerate; never patch the output.
+    rationale: A hand edit is silently lost on the next regeneration and the divergence is hard to spot.
+    cites: [ARMS P5]
+    example: A wrong int_ join is fixed in the model spec, then regenerated — not edited in the SQL.
+  - id: P6
+    title: Single source of truth; pull from Gold
+    statement: >-
+      One definition per fact. Taxpayer identity is one int_ golden record; a metric is defined once
+      and reused by every surface; consumers pull from Gold, never a bespoke copy.
+    rationale: One definition means one number everywhere and one place to correct it.
+    cites: [Blueprint Taxpayer-360, content design D5/D9/X4]
+    example: The KPI tile and the API return the same total_outstanding because both read the same mart.
+  - id: P7
+    title: Tables and rules live in configuration
+    statement: Reference data, thresholds and rules are configuration (Git), not hard-coded logic.
+    rationale: Config can be reviewed, versioned and changed without a code deploy.
+    cites: [Blueprint, DQF thresholds]
+    example: Reference vocabularies drive accepted_values; DQ targets live in quality/thresholds.
+  - id: P8
+    title: Build capability, not dependency
+    statement: The MTCA team progressively owns each dimension (shadow → pair → lead); contractors transfer, not retain.
+    rationale: The platform must run after the contractors leave.
+    cites: [content design X1, Empowerment case]
+    example: Each skill is a teaching harness the team runs themselves, not a black box.
+  - id: P9
+    title: Technology follows workload
+    statement: Choose technology for the job in front of you; don't bend the workload to a preferred tool.
+    rationale: Tool-led decisions produce mismatched architectures.
+    cites: [Blueprint]
+    example: ClickHouse for the analytical medallion; dbt for transforms; SAS only where advanced analytics fit.
+  - id: P10
+    title: Evidence, not assertion
+    statement: "\"Done\" means demonstrated — manifests, test results, reconciliations, a green report. Not \"it should work\"."
+    rationale: A tax platform must be auditable; claims without evidence are how wrong numbers ship.
+    cites: [DQF, content design D13]
+    example: A load isn't done without a SUCCESS reconciliation manifest (P12); a release isn't ready without a green readiness report.
+  - id: P11
+    title: Verify before publish
+    statement: >-
+      A description/semantic is DRAFT until VERIFIED against an authoritative source or data arithmetic;
+      only VERIFIED meaning may drive a mart or the DcP3 handover.
+    rationale: A wrong description becomes a wrong number downstream (the R401-M lesson).
+    cites: [DQF §S5, verify-catalogue-semantics]
+    example: A box described as "tax due" must be confirmed against the form before any indicator uses it.
+  - id: P12
+    title: Reconcile every custody transfer
+    statement: Every data hand-off (source→Bronze, and onward) is reconciled exactly; no silent fallback.
+    rationale: Silent truncation/partial loads corrupt everything downstream.
+    cites: [DQF S2, onboard-source]
+    example: ClickHouse count must equal the source count; a degraded mode exits non-zero and marks the manifest FAILED.
+  - id: P13
+    title: Version-controlled by default
+    statement: Everything-as-code, committed and PR-reviewed; nothing lives only in a chat, a Downloads folder or a personal drive.
+    rationale: History, review and a single source of truth are preconditions of a maintainable platform.
+    cites: [content design §1, repo-scaffold]
+    example: Every skill's last step writes its output into the repo and commits it on the workstation.
+  - id: P14
+    title: Cross-platform by default
+    statement: The team works on Windows and macOS; tooling and commands work on both, with no single-OS assumption.
+    rationale: A mixed-OS team can't depend on one shell; OS-agnostic tooling keeps everyone productive.
+    cites: [content design §1/§6]
+    example: Every cookbook gives PowerShell and bash; git runs on the workstation, same workflow on both.

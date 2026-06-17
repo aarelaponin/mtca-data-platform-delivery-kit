@@ -30,6 +30,14 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
   skill-pack plan. This is the blueprint the rest of the kit is built against.
 
 ### skills/
+- `mtca-architecture-principles/` — **foundation skill (built & validated).** The numbered,
+  priority-ordered, citable principles register (P1–P14, distilled from the Blueprint + DQF) with
+  `principles.py` (list · render an ADR that cites principles, with validation · gate a decision to
+  cite ≥1 principle). Decide by citation, not re-argument.
+- `mtca-dev-workflow/` — **foundation/ops skill (built & validated).** The two-track method (generate
+  offline in the sandbox vs run on the live stack/workstation), cross-OS command discipline,
+  commit-on-the-workstation git, and the end-to-end dev loop. `devcheck.py` is the cross-OS toolchain
+  doctor.
 - `repo-scaffold/` — **foundation skill (built).** Lays out the platform mono-repo with
   conventions baked in (the five-layer dbt medallion, ingestion, catalogue, quality, consumption,
   security, ops, plus cross-OS hygiene files) **and** owns the shared, cross-OS,
@@ -84,6 +92,8 @@ dist/        Packaged, installable artefacts (.skill files ready to load into Co
 
 ### dist/
 Packaged, installable skills — open one in Claude Desktop (Cowork) and choose **Save skill**:
+- `mtca-architecture-principles.skill`
+- `mtca-dev-workflow.skill`
 - `repo-scaffold.skill`
 - `onboard-source.skill`
 - `build-dbt-model.skill`
