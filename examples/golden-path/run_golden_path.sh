@@ -6,8 +6,8 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 SK="$HERE/../../skills"
 IN="$HERE/inputs"
 REPO="$HERE/platform-repo"
-PB="${PB_MODULE:-$HERE/../../../08-pb-migration/BOP Registration/Bopindex/bopindex.pbl}"
-INV="${PB_INVENTORY:-$HERE/../../../04-db-legacy/income-dw-analysis/phase1_source_tables.yaml}"
+PB="${PB_MODULE:-$HERE/../../../../10-workstreams/pb-migration/BOP Registration/Bopindex/bopindex.pbl}"
+INV="${PB_INVENTORY:-$HERE/../../../../80-reference/legacy-db/income-dw-analysis/phase1_source_tables.yaml}"
 
 py() { python3 "$@"; }
 

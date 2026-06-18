@@ -55,7 +55,7 @@ evidence. Don't try to parse the `.pbl` yourself — the script already did it c
    table names in the source database. The script accepts a YAML with `table_name:` /
    `database:` keys, a JSON list, or a plain newline-separated list of names. The inventory is
    what lets the script tell a real data table from a PowerBuilder class or a word inside a
-   message string. At MTCA this is the legacy DWH inventory under `04-db-legacy/…/phase1_source_tables.yaml`.
+   message string. At MTCA this is the legacy DWH inventory under `80-reference/legacy-db/…/phase1_source_tables.yaml`.
    If you have no inventory, the script falls back to accepting only tables seen in
    INSERT/UPDATE/DELETE/DataWindow contexts — noisier, so confirm the table list more carefully.
 

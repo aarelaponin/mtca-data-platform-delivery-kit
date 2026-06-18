@@ -140,7 +140,7 @@ sequence against the Debt Management milestones. See `docs/delivery-guidance_con
 These were produced alongside the kit and live elsewhere in the working folder; they can be
 brought in as the kit's scope is confirmed:
 - **BOP Registration semantics & source-catalogue report**
-  (`05-data-platform/04-data-catalogue/_module-semantics/`) — the experiment that produced the
+  (`10-workstreams/data-platform/04-data-catalogue/_module-semantics/`) — the experiment that produced the
   pilot skill; the finished worked example is also bundled inside the skill's `references/`.
 
 ---

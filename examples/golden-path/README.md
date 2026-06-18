@@ -11,7 +11,7 @@ hand-written except the small input specs in `inputs/`.
 cd examples/golden-path
 bash run_golden_path.sh          # macOS / Linux; pure Python, no database needed
 ```
-(The BOP semantics step uses the real module at `08-pb-migration/BOP Registration/...`; set
+(The BOP semantics step uses the real module at `10-workstreams/pb-migration/BOP Registration/...`; set
 `PB_MODULE` / `PB_INVENTORY` to point elsewhere, or it's skipped.) The result is `platform-repo/`.
 
 ## What each step produced (the loop)

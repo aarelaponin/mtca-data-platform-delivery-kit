@@ -3,7 +3,7 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "I've got a legacy PowerBuilder module in '08-pb-migration/BOP Registration' and our legacy schema inventory is the YAML under '04-db-legacy/income-dw-analysis/phase1_source_tables.yaml'. I can't get database access yet. Which tables and columns does this module use, and can you produce something I can load into OpenMetadata?",
+      "prompt": "I've got a legacy PowerBuilder module in '10-workstreams/pb-migration/BOP Registration' and our legacy schema inventory is the YAML under '80-reference/legacy-db/income-dw-analysis/phase1_source_tables.yaml'. I can't get database access yet. Which tables and columns does this module use, and can you produce something I can load into OpenMetadata?",
       "expected_output": "Runs the extractor against bopindex.pbl with the inventory; produces a finished <Module>_OpenMetadata.yaml + .md covering the BOP tables (taxpayer, bop, bopyearmember, partner, contact, coincentive, whitefile, etc.) with app->table lineage and DRAFT business descriptions; prunes framework false-positives; maps the abbreviation prefixes; marks output DRAFT with a verification note.",
       "files": []
     },
